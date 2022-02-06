@@ -1,0 +1,117 @@
+""" import statements """
+from pymongo import MongoClient
+
+# MongoDB connection string 
+url = "mongodb+srv://admin:admin@cluster0.rsnru.mongodb.net/pytech?retryWrites=true&w=majority"
+
+# connect to the MongoDB cluster 
+client = MongoClient(url)
+
+# connect pytech database
+db = client.pytech
+
+""" three student documents"""
+# Daniel Watson's data document 
+daniel = {
+    "student_id": "1007",
+    "first_name": "Daniel",
+    "last_name": "Watson",
+    "enrollments": [
+        {
+            "term": "Session 2",
+            "gpa": "4.0",
+            "start_date": "Feb 6, 2022",
+            "end_date": "March 1, 2022",
+            "courses": [
+                {
+                    "course_id": "CYBR410",
+                    "description": "Data Database Security",
+                    "instructor": "Professor Lappe",
+                    "grade": "A+"
+                },
+                {
+                    "course_id": "CYBR410",
+                    "description": "Pymongo",
+                    "instructor": "Professor Lappe",
+                    "grade": "A+"
+                }
+            ]
+        }
+    ]
+
+}
+
+# Fred Dirt data document 
+fred = {
+    "student_id": "1008",
+    "first_name": "Fred",
+    "last_name": "Dirt",
+    "enrollments": [
+        {
+            "term": "Session 2",
+            "gpa": "3.41",
+            "start_date": "Feb 6, 2022",
+            "end_date": "March 1, 2022",
+            "courses": [
+                {
+                    "course_id": "CYBR410",
+                    "description": "Data Database Security",
+                    "instructor": "Professor Lappe",
+                    "grade": "B-"
+                },
+                {
+                    "course_id": "CYBR410",
+                    "description": "Pymongo",
+                    "instructor": "Professor Lappe",
+                    "grade": "B-"
+                }
+            ]
+        }
+    ]
+}
+
+# Joe Dirte data document
+joe = {
+    "student_id": "1009",
+    "first_name": "Joe",
+    "last_name": "Dirte",
+    "enrollments": [
+        {
+            "term": "Session 2",
+            "gpa": "2.5",
+            "start_date": "Feb 6, 2022",
+            "end_date": "March 1, 2022",
+            "courses": [
+                {
+                    "course_id": "CYBR410",
+                    "description": "Database Development and Use",
+                    "instructor": "Professor Lappe",
+                    "grade": "B"
+                },
+                {
+                    "course_id": "CSD 320",
+                    "description": "Data Database Security",
+                    "instructor": "Professor Lappe",
+                    "grade": "B"
+
+                }
+            ]
+        }
+    ]
+}
+
+# get the students collection 
+students = db.students
+
+# insert statements with output 
+print("\n  -- INSERT STATEMENTS --")
+daniel_student_id = students.insert_one(daniel).inserted_id
+print("  Inserted student record Daniel Watson into the students collection with document_id " + str(daniel_student_id))
+
+fred_student_id = students.insert_one(fred).inserted_id
+print("  Inserted student record Fred Dirt into the students collection with document_id " + str(fred_student_id))
+
+joe_student_id = students.insert_one(joe).inserted_id
+print("  Inserted student record Joe Dirte into the students collection with document_id " + str(joe_student_id))
+
+input("\n\n  End of program, press any key to exit... ")
